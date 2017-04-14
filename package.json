@@ -19,6 +19,7 @@
     "grunt-contrib-cssmin": "^2.0.0",
     "grunt-contrib-uglify": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-image-embed": "^0.3.3"
+    "grunt-image-embed": "^0.3.3",
+    "matchdep": "^1.0.1"
   }
 }

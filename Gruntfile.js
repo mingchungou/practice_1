@@ -1,16 +1,4 @@
 module.exports = function(grunt) {
-    /*grunt.registerTask("speak", function() {
-        console.log("I'm speaking");
-    });
-
-    grunt.registerTask("yell", function() {
-        console.log("I'm yelling");
-    });
-
-    grunt.registerTask("both", ["speak", "yell"]);
-
-    grunt.registerTask("default", ["both"]);*/
-
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
@@ -20,70 +8,55 @@ module.exports = function(grunt) {
             },
             js: {
                 src: [
-                    "js/jquery-3.2.0.min.js",
-                    "js/tether.min.js",
-                    "js/bootstrap.min.js",
-                    "js/owl.carousel.min.js",
-                    "js/wow.min.js",
-                    "js/smooth-scroll.min.js",
-                    "js/myScript.js"
+                    "app/js/jquery-3.2.0.min.js",
+                    "app/js/tether.min.js",
+                    "app/js/bootstrap.min.js",
+                    "app/js/owl.carousel.min.js",
+                    "app/js/wow.min.js",
+                    "app/js/smooth-scroll.min.js",
+                    "app/js/myScript.js"
                 ],
-                dest: "dist/js/app.js"
+                dest: "www/js/script.js"
             },
             css: {
                 src: [
-                    "css/font-awesome.min.css",
-                    "css/owl.carousel.min.css",
-                    "css/owl.theme.default.min.css",
-                    "css/bootstrap.min.css",
-                    "css/animate.min.css",
-                    "css/myStyle.css"
+                    "temp/font-awesome.min.css",
+                    "app/css/owl.carousel.min.css",
+                    "app/css/owl.theme.default.min.css",
+                    "app/css/bootstrap.min.css",
+                    "app/css/animate.min.css",
+                    "app/css/myStyle.css"
                 ],
-                dest: "dist/css/style.css"
+                dest: "www/css/style.css"
             }
         },
         watch: {
             js: {
-                files: ["js/**/*.js"],
+                files: ["app/js/**/*.js"],
                 tasks: ["concat:js"]
             },
             css: {
-                files: ["css/**/*.css"],
+                files: ["app/css/**/*.css"],
                 tasks: ["concat:css"]
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    "css/style.min.css": [
-                        "temp/font-awesome.min.css",
-                        "css/owl.carousel.min.css",
-                        "css/owl.theme.default.min.css",
-                        "css/bootstrap.min.css",
-                        "css/animate.min.css",
-                        "css/myStyle.css"
-                    ]
+                    "www/css/style.min.css": "<%= concat.css.src %>"
                 }
             }
         },
         uglify: {
             dist: {
                 files: {
-                    "js/script.min.js": [
-                        "js/jquery-3.2.0.min.js",
-                        "js/tether.min.js",
-                        "js/bootstrap.min.js",
-                        "js/owl.carousel.min.js",
-                        "js/wow.min.js",
-                        "js/smooth-scroll.min.js",
-                        "js/myScript.js"
-                    ]
+                    "www/js/script.min.js": "<%= concat.js.src %>"
                 }
             }
         },
         imageEmbed: {
-            dist: {
-                src: "css/font-awesome.min.css",
+            font: {
+                src: "app/css/font-awesome.min.css",
                 dest: "temp/font-awesome.min.css",
                 options: {
                     deleteAfterEncoding : false,
@@ -94,16 +67,22 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: 'scss',
-                    cssDir: 'dist'
+                    sassDir: 'app/scss',
+                    cssDir: 'temp'
                 }
             }
         },
         clean: {
-            dist: {
+            temp: {
                 files: [{
                     dot: true,
                     src: ["temp"]
+                }]
+            },
+            www: {
+                files: [{
+                    dot: true,
+                    src: ["www"]
                 }]
             }
         },
@@ -111,9 +90,13 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    dest: "scss",
+                    cwd: "app",
+                    dest: "www",
                     src: [
-                        "index.html"
+                        "index.html",
+                        "favicon.ico",
+                        "templates/**",
+                        "images/**"
                     ]
                 }]
             }
@@ -121,9 +104,11 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("default", [
-        "imageEmbed",
+        "clean:www",
+        "imageEmbed:font",
         "cssmin",
         "uglify",
-        "clean"
+        "copy",
+        "clean:temp"
     ]);
 };
