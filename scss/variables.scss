@@ -1,0 +1,50 @@
+$textColor: #111111;
+$primaryColor: #12afaf;
+$primaryColorDark: #064e4e;
+$secondaryColor: #009500;
+$secondaryColorDark: #057705;
+$whiteColor: #ffffff;
+$grayColor: #8c8888;
+
+.background-transparent {
+    background-color: transparent;
+}
+
+.background-textColor {
+    background-color: $textColor;
+}
+
+.background-primaryColor {
+    background-color: $primaryColor;
+    color: $whiteColor;
+}
+
+.background-secondaryColor {
+    background-color: $secondaryColor;
+    color: $whiteColor;
+}
+
+@mixin addBackgroundImage($url, $posX, $posY, $repeat, $attachment, $size) {
+    background: $url $posX $posY $repeat $attachment;
+    background-size: $size;
+}
+
+@mixin changeBackgroundImage($url) {
+    background-image: $url;
+}
+
+@mixin addTransition($property, $duration, $timingFuc) {
+    transition: $property $duration $timingFuc;
+}
+
+@keyframes arrow-down-animated {
+    from {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
