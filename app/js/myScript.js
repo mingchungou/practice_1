@@ -70,7 +70,7 @@
 
     //Init Smooth scroll
     var mainHeader = $(".main-header"),
-        goUpIcon = $(".go-up"),
+        goUpIcon = $(".go-top"),
         xWindow = $(window);
 
     smoothScroll.init({
@@ -82,9 +82,9 @@
         var scrolltop = $(this).scrollTop();
 
         if (scrolltop >= 50) {
-            goUpIcon.fadeIn();
+            goUpIcon.addClass("show");
         } else {
-            goUpIcon.fadeOut();
+            goUpIcon.removeClass("show");
         }
     });
 

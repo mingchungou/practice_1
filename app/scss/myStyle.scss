@@ -6,21 +6,51 @@ html {
 
 body {
     color: $textColor;
+    overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
 }
 
+.btn-primary {
+    border-color: transparent;
+    background-color: $primaryColor;
+    color: $whiteColor;
+    transition: all 0.5s ease;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: transparent;
+        box-shadow: none;
+        background-color: $secondaryColor;
+        color: $whiteColor;
+    }
+}
+
+.btn-secondary {
+    color: $textColor;
+    cursor: pointer;
+
+    &:focus {
+        box-shadow: none;
+        color: $textColor;
+    }
+}
+
+/************** Welcome styles *****************/
 .welcome {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    @include addBackgroundImage(url("../images/background.jpg"), center, top, no-repeat, fixed, cover);
+    background: url("../images/background.jpg") center top no-repeat fixed;
+    background-size: cover;
     color: $whiteColor;
 
+    /************** Header styles *****************/
     .main-header {
         padding: 0.5rem 0;
-        @extend .background-textColor;
-        color: $whiteColor;
-        @include addTransition(all, 0.5s, ease);
+        background-color: $textColor;
+        transition: all 0.5s ease;
 
         .container {
             display: flex;
@@ -35,9 +65,10 @@ body {
             .search-btn-header,
             .menu-btn-header {
                 border: 0;
-                @extend .background-transparent;
+                background-color: transparent;
                 color: $whiteColor;
                 font-size: 2rem;
+                cursor: pointer;
 
                 &:focus,
                 .fa:focus {
@@ -49,6 +80,69 @@ body {
                 margin-left: auto;
                 margin-right: 0.8rem;
             }
+
+            /************** Search styles *****************/
+            #search-header {
+                flex: 1 1 100%;
+
+                .search-content-header {
+                    display: flex;
+                    margin: 1rem 0;
+                    height: 3rem;
+
+                    input[type="text"] {
+                        flex: 1 1 auto;
+                        padding: 1rem;
+                        border: 0;
+                        border-radius: 5px 0 0 5px;
+                    }
+
+                    input[type="submit"] {
+                        flex: 0 1 auto;
+                        padding: 0 1rem;
+                        border: 0;
+                        border-radius: 0 5px 5px 0;
+                        background-color: $primaryColor;
+                        color: $whiteColor;
+                        cursor: pointer;
+                    }
+
+                    input[type="text"]:focus,
+                    input[type="submit"]:focus {
+                        outline: 0;
+                    }
+                }
+            }
+
+            /************** Menu styles *****************/
+            #menu-header {
+                flex: 1 1 100%;
+
+                ul {
+                    margin: 1rem 0 0;
+                    padding: 0;
+                    list-style: none;
+
+                    a {
+                        display: block;
+                        padding: 0.8rem 0;
+                        border-top: 1px solid $grayColor;
+                        color: $whiteColor;
+                        text-align: center;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                    }
+
+                    a:hover,
+                    li.active a {
+                        color: $primaryColor;
+                    }
+
+                    li a:focus {
+                        outline: 0;
+                    }
+                }
+            }
         }
 
         &.header-animated {
@@ -56,116 +150,31 @@ body {
             padding: 1rem 0;
         }
     }
-}
 
-.btn-primary {
-    border-color: transparent;
-    @extend .background-primaryColor;
-    @include addTransition(all, 0.5s, ease);
-
-    &:hover,
-    &:focus,
-    &:active {
-        border-color: transparent;
-        box-shadow: none;
-        @extend .background-secondaryColor;
-    }
-}
-
-.btn-secondary {
-    color: $textColor;
-
-    &:focus {
-        box-shadow: none;
-        color: $textColor;
-    }
-}
-
-
-/************** Form search header *****************/
-#search-header {
-    flex: 1 1 100%;
-
-    .search-content-header {
+    /************** Welcome text styles *****************/
+    .welcome-text {
+        flex: 1 1 auto;
         display: flex;
-        margin: 1rem 0;
-        height: 3rem;
+        align-items: center;
 
-        input[type="text"] {
-            flex: 1 1 auto;
-            padding: 1rem;
-            border: 0;
-            border-radius: 5px 0 0 5px;
+        .display-4 {
+            margin-top: 4rem;
         }
+    }
 
-        input[type="submit"] {
-            flex: 0 1 auto;
-            padding: 0 1rem;
-            border: 0;
-            border-radius: 0 5px 5px 0;
-            @extend .background-primaryColor;
-        }
-
-        input[type="text"]:focus,
-        input[type="submit"]:focus {
-            outline: 0;
-        }
+    /************** Arrow down atyles *****************/
+    .arrow-down a {
+        display: inline-block;
+        color: $whiteColor;
+        font-size: 4rem;
+        animation: arrow-down-animated 2s ease-in-out infinite;
     }
 }
 
-/************** Menu header *****************/
-#menu-header {
-    flex: 1 1 100%;
-
-    ul {
-        margin: 1rem 0 0;
-        padding: 0;
-        list-style: none;
-
-        a {
-            display: block;
-            padding: 0.8rem 0;
-            border-top: 1px solid $grayColor;
-            color: $whiteColor;
-            text-align: center;
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-
-        a:hover,
-        li.active a {
-            color: $primaryColor;
-        }
-
-        li:focus,
-        li a:focus {
-            outline: 0;
-        }
-    }
-}
-
-/************** Welcome text *****************/
-.welcome-text {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-
-    .display-4 {
-        margin-top: 4rem;
-    }
-}
-
-/************** Down arrow *****************/
-.arrow-down a {
-    display: inline-block;
-    color: $whiteColor;
-    font-size: 4rem;
-    animation: arrow-down-animated 2s ease-in-out infinite;
-}
-
-/************** Agency *****************/
+/************** Agency styles *****************/
 .agency {
-    @extend .background-primaryColor;
+    background-color: $primaryColor;
+    color: $whiteColor;
 
     img {
         display: block;
@@ -174,7 +183,7 @@ body {
     }
 }
 
-/************** Best Election *****************/
+/************** Best election styles *****************/
 .best-election {
     h2 span {
         color: $primaryColor
@@ -190,7 +199,8 @@ body {
                 width: 4.7rem;
                 height: 4.7rem;
                 border-radius: 50%;
-                @extend .background-secondaryColor;
+                background-color: $secondaryColor;
+                color: $whiteColor;
                 font-size: 2.3rem;
                 line-height: 4.7rem;
             }
@@ -204,9 +214,10 @@ body {
     }
 }
 
-/************** Service *****************/
+/************** Service styles *****************/
 .service {
-    @include addBackgroundImage(url("../images/background-service.jpg"), center, center, no-repeat, fixed, cover);
+    background: url("../images/background-service.jpg") center center no-repeat fixed;
+    background-size: cover;
     color: $whiteColor;
 
     article {
@@ -240,7 +251,7 @@ body {
                     font-size: 2rem;
                     content: "\f054";
                     font-family: FontAwesome;
-                    @include addTransition(all, 0.5s, ease);
+                    transition: all 0.5s ease;
                 }
 
                 &:hover::after {
@@ -257,7 +268,7 @@ body {
     }
 }
 
-/************** Last project *****************/
+/************** Last project styles *****************/
 .last-projects .container {
     padding: 0;
 
@@ -280,12 +291,17 @@ body {
         .owl-prev,
         .owl-next {
             margin: 0 0.5rem;
-            color: $primaryColor;
             font-size: 3rem;
+            cursor: initial;
 
-            &:hover {
-                color: $secondaryColor;
-                @include addTransition(all, 1.5s, ease);
+            .fa {
+                color: $primaryColor;
+                cursor: pointer;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    color: $secondaryColor;
+                }
             }
         }
 
@@ -298,9 +314,9 @@ body {
     }
 }
 
-/************** Footer *****************/
+/************** Footer styles *****************/
 .end-page {
-    @extend .background-textColor;
+    background-color: $textColor;
     color: $whiteColor;
     font-size: 0.9rem;
 
@@ -316,7 +332,7 @@ body {
             color: $whiteColor;
             opacity: 0.7;
             font-size: 2rem;
-            @include addTransition(all, 0.5s, ease);
+            transition: all 0.5s ease;
 
             &:hover {
                 opacity: 1;
@@ -329,17 +345,16 @@ body {
     }
 }
 
-.go-up {
-    display: none;
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
+/************** Go top icon styles *****************/
+.go-top {
+    @include position-fixed(initial, 1rem, -4rem, initial);
+    text-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
     z-index: 99999;
-    color: $primaryColor;
+    color: $whiteColor;
     font-size: 3rem;
     text-decoration: none;
     line-height: 0;
-    @include addTransition(all, 0.5s, ease);
+    transition: all 0.5s ease;
 
     &:hover,
     &:focus {
@@ -347,16 +362,22 @@ body {
         color: $whiteColor;
         text-decoration: none;
     }
+
+    &.show {
+        bottom: 1rem;
+    }
 }
 
-/************** About internal page *****************/
+/************** Internal page styles *****************/
 .internal-page {
     .welcome {
         height: 50vh;
     }
 
+    /************** Route styles *****************/
     .route {
-        @extend .background-primaryColor;
+        background-color: $primaryColor;
+        color: $whiteColor;
 
         .container a {
             color: $whiteColor;
@@ -372,6 +393,7 @@ body {
         }
     }
 
+    /************** About - accordion styles *****************/
     #accordion .card {
         border: 0;
         border-radius: 0;
@@ -381,21 +403,26 @@ body {
             padding: 0;
             border-bottom: 0;
             border-radius: 0;
-            @extend .background-transparent;
+            background-color: transparent;
             font-size: 1.2rem;
 
             a {
                 display: block;
                 padding: 1rem;
                 border-radius: 5px;
-                @extend .background-primaryColor;
+                background-color: $primaryColor;
+                color: $whiteColor;
                 text-decoration: none;
-                @include addTransition(all, 0.5s, ease);
+                transition: all 0.5s ease;
+
+                &:hover {
+                    background-color: $secondaryColor;
+                    color: $whiteColor;
+                }
 
                 &:hover,
                 &:focus,
                 &:active {
-                    @extend .background-secondaryColor;
                     outline: 0;
                 }
             }
@@ -405,12 +432,11 @@ body {
             padding: 0.5rem 0 0;
         }
     }
-}
 
-/************** Service internal page *****************/
-.internal-page {
+    /************** Service - service list styles *****************/
     .service-list {
-        @extend .background-secondaryColor;
+        background-color: $secondaryColor;
+        color: $whiteColor;
 
         .item-service {
             margin-bottom: 1rem;
@@ -424,7 +450,7 @@ body {
                 margin-bottom: 1rem;
                 color: $primaryColor;
                 font-size: 6rem;
-                @include addTransition(all, 1s, ease);
+                transition: all 1s ease;
             }
 
             &:hover .fa {
@@ -434,65 +460,68 @@ body {
         }
     }
 
+    /************** Service - modal styles *****************/
     .modal {
         padding-right: 0 !important;
     }
 }
 
+/************** Media Queeries *****************/
 @media (min-width: 576px) {
     .modal .modal-dialog {
         max-width: 600px;
     }
 }
 
-/************** Media Queeries *****************/
 @media (min-width: 768px) {
-    .welcome .main-header .container .search-btn-header {
-        order: 2;
-        margin-right: 0;
-        margin-left: 1rem;
-    }
+    .welcome .main-header .container {
+        .search-btn-header {
+            order: 2;
+            margin-right: 0;
+            margin-left: 1rem;
+        }
 
-    #menu-header {
-        order: 1;
-        flex: 0 1 auto;
-        display: block;
-        margin-left: auto;
-        height: auto !important;
+        #search-header {
+            order: 3;
+            position: absolute;
+            width: 28rem;
+            right: 1rem;
+            top: 2.8rem;
+            transition: all 0.5s ease;
+        }
 
-        ul {
-            display: flex;
-            margin: 0;
+        #menu-header {
+            order: 1;
+            flex: 0 1 auto;
+            display: block;
+            margin-left: auto;
+            height: auto;
 
-            li {
-                a {
-                    padding: 0.8rem;
-                    border-top: 0;
-                    border-bottom: 4px solid transparent;
-                    text-transform: capitalize;
-                    @include addTransition(all, 0.5s, ease);
-                }
+            ul {
+                display: flex;
+                margin: 0;
 
-                &:not(:last-child) a {
-                    margin-right: 0.6rem;
-                }
+                li {
+                    a {
+                        padding: 0.8rem;
+                        border-top: 0;
+                        border-bottom: 4px solid transparent;
+                        text-transform: capitalize;
+                        transition: all 0.5s ease;
+                    }
 
-                a:hover,
-                &.active a {
-                    border-bottom: 4px solid;
-                    color: $primaryColor;
+                    &:not(:last-child) a {
+                        margin-right: 0.6rem;
+                    }
+
+                    a:hover,
+                    &.active a {
+                        border-bottom: 4px solid;
+                        color: $primaryColor;
+                    }
                 }
             }
         }
-    }
-
-    #search-header {
-        order: 3;
-        position: absolute;
-        width: 28rem;
-        right: 1rem;
-        top: 2.8rem;
-        @include addTransition(all, 0.5s, ease);
     }
 
     .service article {
@@ -503,7 +532,7 @@ body {
             flex-basis: 160px;
             margin-right: 0;
             margin-bottom: 1rem;
-            @include addTransition(all, 1s, ease);
+            transition: all 1s ease;
         }
 
         &:hover img {
@@ -556,11 +585,11 @@ body {
     }
 
     .welcome {
-        @include changeBackgroundImage(url("../images/background-big.jpg"));
+        background-image: url("../images/background-big.jpg");
     }
 
     .service {
-        @include changeBackgroundImage(url("../images/background-service-big.jpg"));
+        background-image: url("../images/background-service-big.jpg");
     }
 
     .best-election {
@@ -581,7 +610,7 @@ body {
                 .fa {
                     flex: 0 1 auto;
                     text-align: center;
-                    @include addTransition(all, 1s, ease);
+                    transition: all 1s ease;
                 }
 
                 &:hover .fa {
