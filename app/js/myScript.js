@@ -1,4 +1,6 @@
 (function() {
+    "use strict";
+    
     //Carousel
     var carousel = $(".owl-carousel");
 

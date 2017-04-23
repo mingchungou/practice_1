@@ -8,12 +8,12 @@ module.exports = function(grunt) {
             },
             js: {
                 src: [
-                    "app/js/jquery-3.2.0.min.js",
-                    "app/js/tether.min.js",
-                    "app/js/bootstrap.min.js",
-                    "app/js/owl.carousel.min.js",
-                    "app/js/wow.min.js",
-                    "app/js/smooth-scroll.min.js",
+                    "app/lib/jquery-3.2.0.min.js",
+                    "app/lib/tether.min.js",
+                    "app/lib/bootstrap.min.js",
+                    "app/lib/owl.carousel.min.js",
+                    "app/lib/wow.min.js",
+                    "app/lib/smooth-scroll.min.js",
                     "app/js/myScript.js"
                 ],
                 dest: "www/js/script.js"
