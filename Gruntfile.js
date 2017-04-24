@@ -1,5 +1,5 @@
-module.exports = function(grunt) {
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+module.exports = function( grunt ) {
+    require( "matchdep" ).filterDev( "grunt-*" ).forEach( grunt.loadNpmTasks );
 
     grunt.initConfig({
         concat: {
@@ -32,12 +32,12 @@ module.exports = function(grunt) {
         },
         watch: {
             js: {
-                files: ["app/js/**/*.js"],
-                tasks: ["concat:js"]
+                files: [ "app/js/**/*.js" ],
+                tasks: [ "concat:js" ]
             },
             css: {
-                files: ["app/css/**/*.css"],
-                tasks: ["concat:css"]
+                files: [ "app/css/**/*.css" ],
+                tasks: [ "concat:css" ]
             }
         },
         cssmin: {
@@ -76,13 +76,13 @@ module.exports = function(grunt) {
             temp: {
                 files: [{
                     dot: true,
-                    src: ["temp"]
+                    src: [ "temp" ]
                 }]
             },
             www: {
                 files: [{
                     dot: true,
-                    src: ["www"]
+                    src: [ "www" ]
                 }]
             }
         },
