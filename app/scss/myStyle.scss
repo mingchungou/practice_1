@@ -7,13 +7,12 @@ html {
 body {
     color: $textColor;
     overflow-x: hidden;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .btn-primary {
     border-color: transparent;
-    background-color: $primaryColor;
-    color: $whiteColor;
+    @extend %background-primary;
     transition: all 0.5s ease;
     cursor: pointer;
 
@@ -22,8 +21,7 @@ body {
     &:active {
         border-color: transparent;
         box-shadow: none;
-        background-color: $secondaryColor;
-        color: $whiteColor;
+        @extend %background-secondary;
     }
 }
 
@@ -102,8 +100,7 @@ body {
                         padding: 0 1rem;
                         border: 0;
                         border-radius: 0 5px 5px 0;
-                        background-color: $primaryColor;
-                        color: $whiteColor;
+                        @extend %background-primary;
                         cursor: pointer;
                     }
 
@@ -173,8 +170,7 @@ body {
 
 /************** Agency styles *****************/
 .agency {
-    background-color: $primaryColor;
-    color: $whiteColor;
+    @extend %background-primary;
 
     img {
         display: block;
@@ -199,8 +195,7 @@ body {
                 width: 4.7rem;
                 height: 4.7rem;
                 border-radius: 50%;
-                background-color: $secondaryColor;
-                color: $whiteColor;
+                @extend %background-secondary;
                 font-size: 2.3rem;
                 line-height: 4.7rem;
             }
@@ -248,9 +243,9 @@ body {
                     position: relative;
                     left: 0;
                     opacity: 0.5;
-                    font-size: 2rem;
                     content: "\f054";
                     font-family: FontAwesome;
+                    font-size: 2rem;
                     transition: all 0.5s ease;
                 }
 
@@ -347,7 +342,7 @@ body {
 
 /************** Go top icon styles *****************/
 .go-top {
-    @include position-fixed(initial, 1rem, -4rem, initial);
+    @include position-fixed((right: 1rem, bottom: -4rem)...);
     text-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
     z-index: 99999;
     color: $whiteColor;
@@ -376,8 +371,7 @@ body {
 
     /************** Route styles *****************/
     .route {
-        background-color: $primaryColor;
-        color: $whiteColor;
+        @extend %background-primary;
 
         .container a {
             color: $whiteColor;
@@ -410,14 +404,12 @@ body {
                 display: block;
                 padding: 1rem;
                 border-radius: 5px;
-                background-color: $primaryColor;
-                color: $whiteColor;
+                @extend %background-primary;
                 text-decoration: none;
                 transition: all 0.5s ease;
 
                 &:hover {
-                    background-color: $secondaryColor;
-                    color: $whiteColor;
+                    @extend %background-secondary;
                 }
 
                 &:hover,
@@ -435,8 +427,7 @@ body {
 
     /************** Service - service list styles *****************/
     .service-list {
-        background-color: $secondaryColor;
-        color: $whiteColor;
+        @extend %background-secondary;
 
         .item-service {
             margin-bottom: 1rem;
@@ -483,10 +474,8 @@ body {
 
         #search-header {
             order: 3;
-            position: absolute;
+            @include position-absolute((top: 2.8rem, right: 1rem)...);
             width: 28rem;
-            right: 1rem;
-            top: 2.8rem;
             transition: all 0.5s ease;
         }
 
@@ -588,10 +577,6 @@ body {
         background-image: url("../images/background-big.jpg");
     }
 
-    .service {
-        background-image: url("../images/background-service-big.jpg");
-    }
-
     .best-election {
         ul {
             &:first-child li .fa {
@@ -633,6 +618,10 @@ body {
                 }
             }
         }
+    }
+
+    .service {
+        background-image: url("../images/background-service-big.jpg");
     }
 
     .modal .modal-dialog {

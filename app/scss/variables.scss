@@ -1,13 +1,31 @@
-$textColor: #111111;
-$primaryColor: #12afaf;
-$primaryColorDark: #064e4e;
-$secondaryColor: #009500;
-$secondaryColorDark: #057705;
-$whiteColor: #ffffff;
-$grayColor: #8c8888;
+$textColor: #111111 !default;
+$primaryColor: #12afaf !default;
+$primaryColorDark: #064e4e !default;
+$secondaryColor: #009500 !default;
+$secondaryColorDark: #057705 !default;
+$whiteColor: #ffffff !default;
+$grayColor: #8c8888 !default;
 
-@mixin position-fixed($top, $right, $bottom, $left) {
+%background-primary {
+    background-color: $primaryColor;
+    color: $whiteColor;
+}
+
+%background-secondary {
+    background-color: $secondaryColor;
+    color: $whiteColor;
+}
+
+@mixin position-fixed($top: null, $right: null, $bottom: null, $left: null) {
     position: fixed;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+@mixin position-absolute($top: null, $right: null, $bottom: null, $left: null) {
+    position: absolute;
     top: $top;
     right: $right;
     bottom: $bottom;

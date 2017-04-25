@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    
+
     //Carousel
     var carousel = $(".owl-carousel");
 
@@ -10,7 +10,6 @@
             margin: 0,
             nav: true,
             autoWidth: false,
-
             navText: ['<i class="fa fa-arrow-circle-left" title="Anterior"></i>', '<i class="fa  fa-arrow-circle-right" title="Siguiente"></i>'],
             responsive: {
                 0: {
