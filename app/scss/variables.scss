@@ -6,7 +6,7 @@ $secondaryColorDark: #057705;
 $whiteColor: #ffffff;
 $grayColor: #8c8888;
 
-@mixin position-fixed( $top, $right, $bottom, $left ) {
+@mixin position-fixed($top, $right, $bottom, $left) {
     position: fixed;
     top: $top;
     right: $right;
@@ -16,12 +16,12 @@ $grayColor: #8c8888;
 
 @keyframes arrow-down-animated {
     from {
-        transform: translateY( 0 );
+        transform: translateY(0);
     }
     50% {
-        transform: translateY( 6px );
+        transform: translateY(6px);
     }
     to {
-        transform: translateY( 0 );
+        transform: translateY(0);
     }
 }
