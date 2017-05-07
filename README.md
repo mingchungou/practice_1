@@ -2,7 +2,6 @@
 
 Examples:
 
-- bootstrap
 - html5
 - css3
 - scss
