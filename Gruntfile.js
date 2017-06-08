@@ -6,7 +6,10 @@ module.exports = function(grunt) {
 
     //Config grunt modules.
     grunt.initConfig({
-        //Module for concatenate js/css files in one.
+        /*
+        - Module for concatenate js/css files in one.
+        - Also can add static data to files.
+        */
         concat: {
             options: {
                 separator: "\n\n\n"
@@ -33,6 +36,16 @@ module.exports = function(grunt) {
                     "app/css/myStyle.css"
                 ],
                 dest: "www/css/style.css"
+            },
+            includeGoogleFont: {
+                options: {
+                    process: function(src, filepath) {
+                        return "@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic');" + src;
+                    }
+                },
+                files: {
+                    "www/css/style.min.css": "www/css/style.min.css",
+                }
             }
         },
         /*
@@ -140,6 +153,7 @@ module.exports = function(grunt) {
         "compass",
         "postcss",
         "cssmin",
+        "concat:includeGoogleFont",
         "uglify",
         "copy",
         "clean:temp"
