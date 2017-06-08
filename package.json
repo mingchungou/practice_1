@@ -2,13 +2,11 @@
   "name": "myfirstpage",
   "version": "0.1.0",
   "description": "My first web page",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ming Chung Ou",
-  "license": "ISC",
-  "dependencies": {},
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "cssnano": "^3.10.0",
