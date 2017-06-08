@@ -1,5 +1,7 @@
-(function() {
+
+(function(window, $) {
     "use strict";
+
 
     //Carousel
     var carousel = $(".owl-carousel");
@@ -30,6 +32,7 @@
             }
         });
     }
+
 
     //Bootstrap modals
     var myModal = $("#myModal");
@@ -63,11 +66,14 @@
         });
     }
 
+
     //Tooltip
     $("[data-toggle='tooltip']").tooltip();
 
+
     //Wow animation
     new WOW().init();
+
 
     //Init Smooth scroll
     var mainHeader = $(".main-header"),
@@ -89,6 +95,7 @@
         }
     });
 
+
     //Header animation
     xWindow.scroll(function () {
         var scroll = xWindow.scrollTop();
@@ -99,4 +106,4 @@
             mainHeader.removeClass("header-animated");
         }
     });
-})();
+})(window, jQuery);

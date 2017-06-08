@@ -1,7 +1,12 @@
-module.exports = function(grunt) {
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+module.exports = function(grunt) {
+    //Load all grunt modules.
+    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+
+
+    //Config grunt modules.
     grunt.initConfig({
+        //Module for concatenate js/css files in one.
         concat: {
             options: {
                 separator: "\n\n\n"
@@ -30,6 +35,10 @@ module.exports = function(grunt) {
                 dest: "www/css/style.css"
             }
         },
+        /*
+        Module for setting a watcher to specific file and execute some tasks when
+        detecting the file is modified.
+        */
         watch: {
             js: {
                 files: ["app/js/**/*.js"],
@@ -40,6 +49,7 @@ module.exports = function(grunt) {
                 tasks: ["concat:css"]
             }
         },
+        //Module for minifying css files in one.
         cssmin: {
             dist: {
                 files: {
@@ -47,6 +57,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+        //Module for minifying js files in one.
         uglify: {
             dist: {
                 files: {
@@ -54,6 +65,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+        //Module for encoding images and fonts within css files.
         imageEmbed: {
             font: {
                 src: "app/css/font-awesome.min.css",
@@ -64,14 +76,16 @@ module.exports = function(grunt) {
                 }
             }
         },
+        //Module for compiling sass file to css.
         compass: {
             dist: {
                 options: {
-                    sassDir: 'app/scss',
-                    cssDir: 'temp'
+                    sassDir: "app/scss",
+                    cssDir: "app/css"
                 }
             }
         },
+        //Module for removing files/folders.
         clean: {
             temp: {
                 files: [{
@@ -86,6 +100,7 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        //Module for copying files from a place to another.
         copy: {
             dist: {
                 files: [{
@@ -100,12 +115,30 @@ module.exports = function(grunt) {
                     ]
                 }]
             }
+        },
+        //Module for adding prefixes.
+        postcss: {
+            options: {
+                map: false,
+                processors: [
+                    require("pixrem")(),
+                    require("autoprefixer")({browsers: "last 3 versions"}),
+                    require("cssnano")()
+                ]
+            },
+            dist: {
+                src: "app/css/myStyle.css"
+            }
         }
     });
 
+
+    //Set how to execute the grunt config.
     grunt.registerTask("default", [
         "clean:www",
         "imageEmbed:font",
+        "compass",
+        "postcss",
         "cssmin",
         "uglify",
         "copy",

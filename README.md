@@ -9,5 +9,5 @@ Examples:
 - fontawesome
 - owl carousel
 - smooth scroll
-- wow
+- wow animation
 - grunt
