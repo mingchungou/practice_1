@@ -22,6 +22,7 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^2.0.0",
+    "grunt-contrib-htmlmin": "^2.4.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
@@ -31,5 +32,15 @@
     "grunt-strip-code": "^1.0.6",
     "matchdep": "^1.0.1",
     "pixrem": "^3.0.2"
+  },
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "github:fortawesome/Font-Awesome",
+    "jquery": "^3.2.1",
+    "owl.carousel": "github:owlcarousel2/OwlCarousel2",
+    "smooth-scroll": "^11.1.0",
+    "tether": "^1.4.0",
+    "wowjs": "github:matthieua/WOW"
   }
 }

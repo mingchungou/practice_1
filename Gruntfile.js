@@ -20,12 +20,12 @@ module.exports = function(grunt) {
                     banner: "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today('yyyy-mm-dd') %> */"
                 },
                 src: [
-                    "app/lib/jquery/js/jquery-3.2.0.min.js",
-                    "app/lib/tether/js/tether.min.js",
-                    "app/lib/bootstrap/js/bootstrap.min.js",
-                    "app/lib/owl.carousel/js/owl.carousel.min.js",
-                    "app/lib/wow/js/wow.min.js",
-                    "app/lib/smooth-scroll/js/smooth-scroll.min.js",
+                    "node_modules/jquery/dist/jquery.min.js",
+                    "node_modules/tether/dist/js/tether.min.js",
+                    "node_modules/bootstrap/dist/js/bootstrap.min.js",
+                    "node_modules/owl.carousel/dist/owl.carousel.min.js",
+                    "node_modules/wowjs/dist/wow.min.js",
+                    "node_modules/smooth-scroll/dist/js/smooth-scroll.min.js",
                     "app/js/**/*.js"
                 ],
                 dest: "www/js/main.js"
@@ -41,10 +41,10 @@ module.exports = function(grunt) {
                 },
                 src: [
                     "temp/fonts/font-awesome.min.css",
-                    "app/lib/owl.carousel/css/owl.carousel.min.css",
-                    "app/lib/owl.carousel/css/owl.theme.default.min.css",
-                    "app/lib/bootstrap/css/bootstrap.min.css",
-                    "app/lib/wow/css/animate.min.css",
+                    "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+                    "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+                    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                    "node_modules/animate.css/animate.min.css",
                     "app/css/*.css"
                 ],
                 dest: "www/css/styles.css"
@@ -103,7 +103,8 @@ module.exports = function(grunt) {
                 files: ["app/scss/*.scss"],
                 tasks: [
                     "compass:convert",
-                    "concat:addFontslocal"
+                    "concat:addFontslocal",
+                    "clean:general"
                 ]
             },
             html: {
@@ -115,11 +116,11 @@ module.exports = function(grunt) {
 
         //Module for handling local server.
         connect: {
-            server: {
+            dist: {
                 options: {
                     port: 9000,
                     hostname: "localhost",
-                    base: "app/",
+                    base: "./",
                     livereload: true
                 }
             }
@@ -127,8 +128,12 @@ module.exports = function(grunt) {
 
         //Module for opening a browser.
         open: {
+            prod: {
+                path: "http://localhost:9000/",
+                app: "Google Chrome"
+            },
             dev: {
-                path: "http://localhost:9000",
+                path: "http://localhost:9000/app/",
                 app: "Google Chrome" //Options: "Firefox", "Safari"
             }
         },
@@ -151,17 +156,14 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: "app/",
-                    src: [
-                        "lib/**/*.min.css",
-                        "css/*.css"
-                    ],
+                    src: "css/*.css",
                     dest: "temp/",
                     ext: ".min.css"
                 }]
             }
         },
 
-        //Module for minifying js files.
+        //Module for minifying js files. Uglify doesn't support Javascript ES6
         uglify: {
             //Convert all js files to .min.js and combine them in one output file.
             combine: {
@@ -203,10 +205,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: "app/",
-                    src: [
-                        "lib/**/*.min.js",
-                        "js/**/*.js"
-                    ],
+                    src: "js/**/*.js",
                     dest: "temp/",
                     ext: ".min.js"
                 }]
@@ -216,7 +215,7 @@ module.exports = function(grunt) {
         //Module for encoding images and fonts within css files.
         imageEmbed: {
             font: {
-                src: "app/lib/font-awesome/css/font-awesome.min.css",
+                src: "node_modules/font-awesome/css/font-awesome.min.css",
                 dest: "temp/fonts/font-awesome.min.css",
                 options: {
                     //If true, after encoding the image/font, the image/font will remove.
@@ -270,8 +269,6 @@ module.exports = function(grunt) {
 
                     //Allow to overwrite existing file.
                     force: true,
-
-                    assetCacheBuster: false,
 
                     //Set a watcher to catch changes and re-compile the sass files.
                     //watch: true
@@ -360,15 +357,44 @@ module.exports = function(grunt) {
                 },
                 src: "www/**/*.html"
             }
+        },
+
+        //Module for minifying js files. Uglify doesn't support Javascript ES6
+        htmlmin: {
+            options: {
+                //Removing comments.
+                removeComments: true,
+
+                //Removing all whitespace.
+                collapseWhitespace: true
+            },
+            specific: {
+
+                files: {
+                    "www/index.html": "www/index.html",
+                    "www/templates/about.html": "www/templates/about.html",
+                    "www/templates/contact.html": "www/templates/contact.html",
+                    "www/templates/service.html": "www/templates/service.html"
+                }
+            },
+            general: {
+                files: [{
+                    expand: true,
+                    cwd: "app/",
+                    src: "**/*.html",
+                    dest: "www",
+                    ext: ".html"
+                }]
+            }
         }
     });
 
 
     //Load grunt modules by matchdep.
-    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+    //require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     //Load grunt modules manually.
-    /*grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-open");
@@ -380,7 +406,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-postcss");
-    grunt.loadNpmTasks("grunt-strip-code");*/
+    grunt.loadNpmTasks("grunt-strip-code");
+    grunt.loadNpmTasks("grunt-contrib-htmlmin");
 
 
     //Set how to execute the grunt config.
@@ -394,12 +421,14 @@ module.exports = function(grunt) {
         "uglify:combine",
         "copy",
         "strip_code:prod",
+        "htmlmin:specific",
         "clean:general"
     ]);
 
     grunt.registerTask("server", [
         "compass:convert",
         "concat:addFontslocal",
+        "clean:general",
         "connect",
         "open:dev",
         "watch"
