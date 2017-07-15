@@ -128,11 +128,7 @@ module.exports = function(grunt) {
 
         //Module for opening a browser.
         open: {
-            prod: {
-                path: "http://localhost:9000/",
-                app: "Google Chrome"
-            },
-            dev: {
+            dist: {
                 path: "http://localhost:9000/app/",
                 app: "Google Chrome" //Options: "Firefox", "Safari"
             }
@@ -430,7 +426,7 @@ module.exports = function(grunt) {
         "concat:addFontslocal",
         "clean:general",
         "connect",
-        "open:dev",
+        "open",
         "watch"
     ]);
 };
